@@ -2,7 +2,7 @@ Summary:	DLNA library
 Summary(pl.UTF-8):	Biblioteka DLNA
 Name:		libdlna
 Version:	0.2.3
-Release:	0.1
+Release:	0.2
 License:	GPL v2
 Group:		Libraries
 Source0:	http://libdlna.geexbox.org/releases/%{name}-%{version}.tar.bz2
@@ -59,10 +59,14 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so
 
 %files devel
 %defattr(644,root,root,755)
