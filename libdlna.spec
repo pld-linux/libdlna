@@ -45,12 +45,7 @@ Statyczna biblioteka libdlna.
 %patch0 -p1
 
 %build
-./configure --prefix=%{_prefix} \
-%if "%{_lib}" == "lib64"
-	--libdir=%{_prefix}/lib64
-%else
-	--libdir=%{_prefix}/lib
-%endif
+./configure --prefix=%{_prefix} --libdir=%{_libdir}
 
 CFLAGS="%{rpmcflags} -Wall -fpic" \
 CC="%{__cc}" \
