@@ -46,9 +46,9 @@ Statyczna biblioteka libdlna.
 
 %build
 ./configure --prefix=%{_prefix}
-%{__make} \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -Wall -fpic"
+CFLAGS="%{rpmcflags} -Wall -fpic" \
+CC="%{__cc}" \
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
