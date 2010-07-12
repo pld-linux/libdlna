@@ -45,17 +45,18 @@ Statyczna biblioteka libdlna.
 %patch0 -p1
 
 %build
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
+./configure \
+	--prefix=%{_prefix} \
+	--libdir=%{_libdir}
 
-CFLAGS="%{rpmcflags} -Wall -fpic" \
-CC="%{__cc}" \
-%{__make} -j1
+%{__make} -j1 \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags} -Wall -fpic -Isrc"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__make} install \
-        DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -66,15 +67,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.?
+%attr(755,root,root) %{_libdir}/libdlna.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libdlna.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/libdlna.so
+%{_includedir}/dlna.h
 %{_pkgconfigdir}/%{name}.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libdlna.a
