@@ -1,14 +1,12 @@
 Summary:	DLNA library
 Summary(pl.UTF-8):	Biblioteka DLNA
 Name:		libdlna
-Version:	0.2.3
-Release:	2
+Version:	0.2.4
+Release:	1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://libdlna.geexbox.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	2c974f95b711e5fd07f78fc4ebfcca66
-Patch0:		%{name}-ffmpeg_paths.patch
-Patch1:		%{name}-ffmpeg.patch
+# Source0-md5:	64d7de57aff5a729f2434fc5e69b4ffc
 URL:		http://libdlna.geexbox.org
 BuildRequires:	ffmpeg-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -43,8 +41,6 @@ Statyczna biblioteka libdlna.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
 ./configure \
