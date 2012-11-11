@@ -3,11 +3,12 @@ Summary(pl.UTF-8):	Biblioteka DLNA
 Name:		libdlna
 Version:	0.2.4
 Release:	1
-License:	GPL v2
+License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://libdlna.geexbox.org/releases/%{name}-%{version}.tar.bz2
 # Source0-md5:	64d7de57aff5a729f2434fc5e69b4ffc
-URL:		http://libdlna.geexbox.org
+URL:		http://libdlna.geexbox.org/
+# libavformat, libavcodec
 BuildRequires:	ffmpeg-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -15,11 +16,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 libdlna aims at being the reference open-source implementation of DLNA
 (Digital Living Network Alliance) standards.
 
+%description -l pl.UTF-8
+libdlna ma na celu być wzorcową, mającą otwarte źródła implementacją
+standardów DLNA (Digital Living Network Alliance).
+
 %package devel
 Summary:	Header files for libdlna library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libdlna
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+# libavformat, libavcodec
+Requires:	ffmpeg-devel
 
 %description devel
 Header files for libdlna library.
@@ -43,6 +50,7 @@ Statyczna biblioteka libdlna.
 %setup -q
 
 %build
+# not autoconf-generated
 ./configure \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir}
