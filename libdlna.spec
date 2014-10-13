@@ -2,11 +2,12 @@ Summary:	DLNA library
 Summary(pl.UTF-8):	Biblioteka DLNA
 Name:		libdlna
 Version:	0.2.4
-Release:	3
+Release:	4
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://libdlna.geexbox.org/releases/%{name}-%{version}.tar.bz2
 # Source0-md5:	64d7de57aff5a729f2434fc5e69b4ffc
+Patch0:		%{name}-ffmpeg.patch
 URL:		http://libdlna.geexbox.org/
 # libavformat, libavcodec
 BuildRequires:	ffmpeg-devel
@@ -48,6 +49,7 @@ Statyczna biblioteka libdlna.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 # not autoconf-generated
@@ -57,7 +59,7 @@ Statyczna biblioteka libdlna.
 
 %{__make} -j1 \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -Wall -fpic -Isrc"
+	CFLAGS="%{rpmcflags} %{rpmcppflags} -Wall -fpic -Isrc"
 
 %install
 rm -rf $RPM_BUILD_ROOT
